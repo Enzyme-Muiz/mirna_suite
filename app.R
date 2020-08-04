@@ -58,7 +58,8 @@ server<- function(input, output)
   })
   
   output$oid1<- renderPrint({
-    print(data())
+   print(data())
+    
     }
   )
   
