@@ -1,0 +1,12 @@
+name: apps
+title: apps
+username:
+account: rajimu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2559511
+bundleId: 3474002
+url: https://rajimu.shinyapps.io/apps/
+when: 1596555041.5635
+asMultiple: FALSE
+asStatic: FALSE

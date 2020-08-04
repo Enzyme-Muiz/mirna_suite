@@ -1,20 +1,13 @@
-#install.packages("ape")
-#setRepositories("rtracklayer")
-#library(rtracklayer)
 library(BiocManager)
-options(repos = BiocManager::repositories())
-#install.packages("remotes")
-#remotes::install_github("mw201608/msigdb")
-library(shiny)
-library(shinyWidgets)
+options(repos = BiocManager::repositories("multiMiR"))
 
 ui<- fluidPage(
                 tabsetPanel(
                   tabPanel(title= "miRNA location",
                 fluidRow
                (
-                column(6,align="center",tag$em(tags$h1("MicroRNA Suite"))),
-                column(6,tags$img(height=10, width=10, src= "miRNA.jpg"))
+                column(6,align="center",tags$em(tags$h1("MicroRNA Suite"))),
+                 column(6, align= "center", tags$img(height=150, width=400, src= "miRNA.jpg"))
                  ),
               fluidRow
               (column(6,
@@ -41,20 +34,17 @@ ui<- fluidPage(
               selectInput("variable", label="select_input",choices=list('PathwayCommonsPathways'=1,'ReactomePathways'=2,'NetPath_Gene_regulation'=3,'KEGG_filtered_canonical_pathways'=4,'DisGeNet'=5,'gene_location'=6)),
               
               
-               textOutput("oid2")
+               textOutput("oid2"),
+              
                 )
                ),
-              setBackgroundColor("green"))    
+              shinyWidgets::setBackgroundColor("green"))    
 
 server<- function(input, output)
   {
   #output$hist<- renderPlot({hist(rnorm(input$num))})
   output$selected_var<- renderText({
-  #yy<- ape::read.gff("./hsa.gff3", na.strings = c(".", "?"), GFF3 = TRUE)
-  #my_columns <- c("seqid", "start", "end", "strand", "type")
-  #df<- rtracklayer::readGFF("./hsa.gff3", columns=my_columns, tags=c("ID", "Alias", "Name"))
   df1= read.csv("./miRNAlocation.csv")
-  #df1<- data.frame(df)
   answer<- df1[df1$Name == input$num2, ] 
   answer1<- answer[, 2]
   result<- c()
@@ -89,13 +79,3 @@ shinyApp(ui= ui, server=server)
 
 
 
-#BatchAdjust(
-#  basedir= "./3620",
-#  outdir=  "./3621new2",
-#  channelsFile = "channelstoadjust.txt",
-#  batchKeyword="Batch_",
-#  anchorKeyword = "anchorstim",
-#  method="95p",
-#  transformation=FALSE,
-#  addExt="new",
-#  plotDiagnostics=TRUE)
